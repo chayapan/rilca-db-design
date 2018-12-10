@@ -1,0 +1,20 @@
+Tables of RILCA Database	
+	USER(User_id, First_name, Last_name, Password, Email, Phone_number)
+	
+	ACADEMIC_STAFF(User_id, Title, Date_joined, Program_code)
+	
+	ACADEMIC_PROGRAM(Program_code, Name)
+	
+	SUPPORTING_STAFF(User_id)
+	
+	EXECUTIVES(User_id, Title)
+	
+	PERFORMANCE_AGREEMENT(Academic_year, Academic_staff_id, Status, Created_at, Created_by, Submitted_at, Reviewed_at, Reviewed_by, Approved_at, Approved_by, Period_start, Period_end)
+	
+	PERFORMANCE_REPORT(Academic_year, Academic_staff_id, Report_date, Report_status, Support_staff_id, Created_at, Created_by, Total_score, Standard_performance_score, Developed_performance_score, Core_values_score)
+	
+	ACTIVITY(Activity_id, Academic_year, Academic_staff_id, Status, Work_code, Name, Description, Created_at, Created_by, Updated_at, Updated_by, Points_earned, Comment)
+	
+	WORK_TYPE(Work_code, Section_number, Question_number, Name, Description, Points)
+	
+	CHANGE_LOG(User_id, Timestamp, Table_name, Column_name, Old_value, New_value)
