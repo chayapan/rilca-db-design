@@ -1,0 +1,4 @@
+*.pyc
+/db.pyc
+/test.pyc
+venv/
