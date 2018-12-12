@@ -73,6 +73,10 @@ class PAItem:
             pa_item = PAItem(id, level, group, parent, display_rank, form_xpath, number, 
                                 score_points, desc_en, desc_th)
             pa_items[id] = pa_item
+        
+        # Locate parent node for all.
+        for i, pa in pa_items.iteritems():
+            pa.findParent(pa_items)
         return pa_items
 
 class PAGroup:
@@ -163,7 +167,15 @@ class PAForm:
         self.sections = PAPart.fromDictionary(items)
         
         # Roots
-        self.roots = [p for i, p in items.iteritems() if p.parent == 'NULL' ]
+        self.roots = [p for i, p in self.items.iteritems() if p.parent == 'NULL' ]
+        
+        # Ordered items for view rendering
+        self.view_items = {}
+        for i, pa in self.items.iteritems():
+            if pa.level == "3:itemClass":
+                # print "//", PAClass(child,self.items).hierarchy_summary
+                self.view_items[pa] = PAClass(pa,self.items)
+        
     def print_items(self):
         for r in self.roots:
             print r.desc_en
