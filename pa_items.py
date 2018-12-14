@@ -5,7 +5,9 @@ Created on Dec 12, 2018
 '''
 import unittest
 import xlrd
+from collections import OrderedDict
 
+WORKBOOK1 = """Physical Design - PA Items.xlsx"""
 
 class PAItem:
     def __init__(self, id, level, group, parent, display_rank, form_xpath, number, score_points, desc_en, desc_th):
@@ -42,7 +44,7 @@ class PAItem:
     def loadFromWorkbook(cls):
         """Returns dictionay of PAItem objects with ID as key."""
         pa_items = {}
-        fname = """Physical Design - PA Items.xlsx"""
+        fname = WORKBOOK1
         sheet_name = "PAItems_v1"
         workbook = xlrd.open_workbook(fname)
         xl_sheet = workbook.sheet_by_name(sheet_name)
@@ -132,7 +134,14 @@ class PAClass:
     def hierarchy_summary(self):
         summary = """"""
         for p in self.hierarchy:
-            summary += """ / """ + p.desc_th
+            summary += """ / """ + p.desc_th # + """(%s)""" % p.desc_en
+        return summary
+
+    @property
+    def hierarchy_summary_en(self):
+        summary = """"""
+        for p in self.hierarchy:
+            summary += """ / """ + p.desc_en # + """(%s)""" % p.desc_en
         return summary
         
     @classmethod
@@ -175,6 +184,7 @@ class PAForm:
             if pa.level == "3:itemClass":
                 # print "//", PAClass(child,self.items).hierarchy_summary
                 self.view_items[pa] = PAClass(pa,self.items)
+        self.view_items = OrderedDict(sorted(self.view_items.items(), key=lambda t: t[1]._item.id)) # Use PAClass instance attr for sorting
         
     def print_items(self):
         for r in self.roots:

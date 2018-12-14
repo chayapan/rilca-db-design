@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+
+{% block main %}
+<h1>Fill Performance Agreement (Update PADocument)</h1>
+  <p>PAItem class in application defined in <b>pa_items.PAItem</b>. The class method <b>PAItem.loadFromWorkbook()</b> reads difiniton from Excel workbook and returns a dictionary of PAItem object.
+  	<b>pa_items.PAForm</b> class takes the items dictionary and add helper functionalities for application layer.
+  </p>
+
+<h2>Design Note</h2>
+  <p>Design - Conceptual: ER entity PAItem represent elements of the Performance Agreement form. We follow recursive relationship design for this entity, where the entity has parent/child relationship with another PAItem entity. Altogether this recursive relationship forms a tree that could map inputs and descriptions appear in the paper form.</p>
+  <p>Implement - Physical: PAItem records are manually extracted from the paper form and encoded with the parent-child relationship. Attributes "level" and "display_rank" were planned for use as help/hint for guiding the tree structure. </p>
+  <p>Inspect/change <b>{{workbook1}}</b> to make changes to <b>PAItem</b> of this prototype system listed here.</p>
+  <hr>
+  
+  
+  <div class="row">
+  	<form method="post" action="{% url "new-document" %}">{% csrf_token %}
+  
+  	<div class="col-md-6">
+		 <h3>Fiscal Year</h3>
+		 	<p>{{year}}<p>
+		 	
+		 <h3>Academic Staff</h3>
+			<p>{{academic_staff.first_name}} {{academic_staff.last_name}}, {{academic_staff.rank}}</p>
+			<p>{{academic_staff.program_id}}</p>
+		 
+  	</div>
+  	<div class="col-md-6">
+  		<h2>Next step</h2>
+  		
+  		<ul>
+  			<li>You will enter performance items (PAItem) that will be tracked during the chosen fiscal year.</li>
+  			<li>List of performance items is shown below, with respective score point for the particular item.</li>
+  			<li>Please choose the items you plan to include in the performance agreement (PADocument) and prepare relevant supporting detail for the items.</li>
+  		</ul>
+  		<button type="submit" class="btn btn-primary btn-block">Confirm</button>
+  	</div>
+  	</form>
+  </div>
+
+
+ <h3>My PA Items</h3>
+ <table class="table table-condensed table-bordered">
+ <tr>
+ 	<td>PAItem.ID</td>
+ 	<td>ParentID</td>
+ 	<td>level</td>
+ 	<td>display_rank</td>
+ 	<td>Hierarchy of this PAItem (TH/EN)</td>
+	<td>Instruction / Requirements</td>
+ </tr>
+{% for item, pa in document.items.iteritems %}
+<tr>
+	<td>{{item.id}}</td>
+	<td>{{item.parent_id}}</td>
+	<td>{{item.level}}</td>
+	<td>{{item.display_rank}}</td>
+	<td>{{pa.hierarchy_summary}} <br>
+		{{pa.hierarchy_summary_en}}
+	</td>
+ 	<td>
+ 	{% include "_add_item_modal.html" with year=year academic_staff=academic_staff pa_class=pa pa_item=item  %}
+ 	
+ 	</td>
+</tr>
+{% endfor %}
+</table>
+
+
+
+
+
+  
+  
+  
+ <h3>All PA Items in Database (Please Select)</h3>
+ <table class="table table-condensed table-bordered">
+ <tr>
+ 	<td>PAItem.ID</td>
+ 	<td>ParentID</td>
+ 	<td>level</td>
+ 	<td>display_rank</td>
+ 	<td>Hierarchy of this PAItem (TH/EN)</td>
+	<td>Instruction / Requirements</td>
+ </tr>
+{% for item, pa in items.iteritems %}
+<tr>
+	<td>{{item.id}}</td>
+	<td>{{item.parent_id}}</td>
+	<td>{{item.level}}</td>
+	<td>{{item.display_rank}}</td>
+	<td>{{pa.hierarchy_summary}} <br>
+		{{pa.hierarchy_summary_en}}
+	</td>
+ 	<td>
+ 	{% include "_add_item_modal.html" with year=year academic_staff=academic_staff pa_class=pa pa_item=item  %}
+ 	
+ 	</td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+
+{% block main %}
+<h1>RILCA Organization</h1>
+  
+  <p> (partial data from public information source)
+  </p>
+  
+  <div class="row">
+  	<div class="col-md-6">
+	 <h3>Academic Programs</h3>
+		 <table class="table table-condensed table-bordered">
+		 <tr>
+		 	<td>AcademicProgram.ID</td>
+		 	<td>Name EN</td>
+		 </tr>
+		{% for id, program in programs.iteritems %}
+		<tr>
+			<td>{{program.id}}</td>
+			<td>{{program.name_en}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+	</div>
+  	<div class="col-md-6">
+		 <h3>Executive Staffs</h3>
+		 <table class="table table-condensed table-bordered">
+		 <tr>
+		 	<td>Staff.ID</td>
+		 	<td>Academic Program</td>
+		 	<td>First Name</td>
+		 	<td>Last Name</td>
+		 	<td>Position</td>
+		 </tr>
+		{% for k, staff in executive_staffs.iteritems %}
+		<tr>
+			<td>TO BE COMPILE</td>
+			<td>{{staff.academic_program}}</td>
+			<td>{{staff.first_name}}</td>
+			<td>{{staff.last_name}}</td>
+			<td>{{staff.position}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+	</div>
+  	<div class="col-md-6">
+		 <h3>Academic Staffs</h3>
+		 <table class="table table-condensed table-bordered">
+		 <tr>
+		 	<td>Staff.ID (TBD)</td>
+		 	<td>Academic Program</td>
+		 	<td>First Name</td>
+		 	<td>Last Name</td>
+		 	<td>Rank</td>
+		 </tr>
+		{% for k, staff in academic_staffs.iteritems %}
+		<tr>
+			<td>{{staff.id}}</td>
+			<td>{{staff.academic_program}}</td>
+			<td>{{staff.first_name}}</td>
+			<td>{{staff.last_name}}</td>
+			<td>{{staff.rank}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+	</div>
+  	<div class="col-md-6">
+		 <h3>Support Staffs</h3>
+		 <table class="table table-condensed table-bordered">
+		 <tr>
+		 	<td>Staff.ID</td>
+		 	<td>Academic Program</td>
+		 	<td>First Name</td>
+		 	<td>Last Name</td>
+		 	<td>Position</td>
+		 </tr>
+		{% for k, staff in support_staffs.iteritems %}
+		<tr>
+			<td>TO BE COMPILE</td>
+			<td>{{staff.academic_program}}</td>
+			<td>{{staff.first_name}}</td>
+			<td>{{staff.last_name}}</td>
+			<td>{{staff.position}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+	</div>
+</div>
+
+
+
+
+
+{% endblock %}
