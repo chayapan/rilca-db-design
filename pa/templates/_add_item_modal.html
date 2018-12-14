@@ -6,6 +6,7 @@
   <div class="modal fade" id="modal{{pa_item.id}}" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
+		<form method="post" action="{% url "fill-document" year=year staff_id=academic_staff.id %}">{% csrf_token %}
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Add Performance Item</h4>
@@ -21,15 +22,19 @@
           </p>
           
           <p>Please give specific details:<br>
-          <textarea class="input" cols="80"></textarea>
+          <textarea name="pa-detail" class="input" cols="80"> </textarea>
           </p>
-          
+          <input type="hidden" name="pa-id" value="{{pa_item.id}}" />
+          <input type="hidden" name="pa-desc-th" value="{{pa_class.hierarchy_summary}}" />
+          <input type="hidden" name="pa-desc-en" value="{{pa_class.hierarchy_summary_en}}" />
+          <input type="hidden" name="pa-score" value="{{pa_item.score_points}}" />
           
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+          <button type="submit" name="add-item" class="btn btn-primary">Confirm</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         </div>
+  		</form>
       </div>
     </div>
   </div>
