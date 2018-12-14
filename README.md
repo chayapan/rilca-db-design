@@ -1,5 +1,5 @@
 # rilca-db-design
-RILCA database design
+RILCA database design prototype application.
 
 # Development:
 
