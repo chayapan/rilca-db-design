@@ -15,6 +15,14 @@ python manage.py runserver
 
 Go to port 8000, for example http://127.0.0.1:8000/items
 
+
+### MariaDB
+
+See this repo for Docker and SQL
+
+https://github.com/sylviachadha/rilca/blob/master/Tables.sql
+
+
 # Staging/Preview
 
 ## Docker / Docker Compose
