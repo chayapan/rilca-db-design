@@ -8,6 +8,7 @@ from django.contrib import admin
 from pa import views
 
 urlpatterns = [
+    url(r'^$', views.index, name="index"),
     url(r'^organization$', views.Organization.as_view(), name="organization"),
     url(r'^items$', views.ItemList.as_view(), name="pa-items-list"),
     url(r'^new/document$', views.NewDocument.as_view(), name="new-document"),
