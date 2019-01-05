@@ -22,6 +22,12 @@ See this repo for Docker and SQL
 
 https://github.com/sylviachadha/rilca/blob/master/Tables.sql
 
+## MySQL
+
+docker-compose build
+docker-compose up -d
+docker exec -it rilca_physicaldesign_db_1 mysql -urilca -prilca
+
 
 # Staging/Preview
 
