@@ -11,3 +11,5 @@ django-filer
 #    Pillow >=2.3.0 (with JPEG and ZLIB support, PIL may work but is not supported)
 
 
+mysqlclient
+
