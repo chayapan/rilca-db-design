@@ -29,7 +29,7 @@ ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-MY_APPS = ['pa']
+MY_APPS = ['pa', 'api']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -75,11 +75,24 @@ WSGI_APPLICATION = 'rilca.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'sqlite': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'rilca_pa',
+        'USER': 'rilca',
+        'PASSWORD': 'rilca',
+        'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     }
 }
+
+# Using multiple database with django
+# See https://shirishweb.wordpress.com/2018/02/06/python-django-using-multiple-database-inspectdb-and-admin-for-existing-database/
+#
+DATABASE_ROUTERS = ['rilca.router.MyDatabaseRouter',] #Router's module path
 
 
 # Password validation
