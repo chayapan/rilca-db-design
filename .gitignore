@@ -2,3 +2,10 @@
 /db.pyc
 /test.pyc
 venv/
+.DS_Store
+.project
+.pydevproject
+PhysicalDesign-Impl
+PhysicalDesign-Impl.zip
+*.bak
+.settings/

@@ -1,2 +1,15 @@
 Django==1.11
 xlrd
+
+django-filer
+
+# django-filer dependency:
+#    Django >= 1.8
+#    django-mptt >=0.6
+#    easy_thumbnails >= 2.0
+#    django-polymorphic >= 0.7
+#    Pillow >=2.3.0 (with JPEG and ZLIB support, PIL may work but is not supported)
+
+
+mysqlclient
+

@@ -1,10 +1,33 @@
-version: '3'
+version: '3.2'
 
 services:
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/app
+      - type: bind
+        source: ./PADocument
+        target: /app/PADocument
+      - type: bind
+        source: ./data
+        target: /app/data
     ports:
       - "4023:8000"
+  db:
+    build: rilca-db/.
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: rilca_pa
+      MYSQL_USER: rilca
+      MYSQL_PASSWORD: rilca
+
+    volumes:
+      - type: bind
+        source: .rilca-db/data
+        target: /dbdata
+      - type: bind
+        source: .rilca-db/conf
+        target: /dbconf
+    ports:
+      - "3306:3306"

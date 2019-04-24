@@ -16,6 +16,11 @@ import os, os.path
 from pa_items import PAItem, PAForm, WORKBOOK1
 from pa_document import PADocument
 from organization import AcademicStaff, AcademicProgram, SupportStaff, ExecutiveStaff, WORKBOOK
+from pa.models import sync_pa_items
+
+def index(request):
+    sync_pa_items()
+    return HttpResponse("OK")
 
 class Form(TemplateView):
     template_name = "pa-form.html"
