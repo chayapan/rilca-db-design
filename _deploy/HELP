@@ -1,0 +1,13 @@
+User Apache2 commands:
+
+a2query -s
+a2dissite rilca-demo
+service apache2 reload
+apache2ctl configtest
+
+
+Useful Docker commands:
+
+docker ps
+docker-compose up -d
+docker-compose down
